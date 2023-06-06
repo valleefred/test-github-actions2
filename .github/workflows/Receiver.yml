@@ -1,0 +1,31 @@
+name: Receiver
+
+on:
+  repository_dispatch:
+    types: [linux-done, windows-done]
+
+jobs:
+  # context:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: crazy-max/ghaction-dump-context@v2
+
+  linux:
+    if: github.event.action == 'linux-done'
+    name: Even more linux work
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        date +%T
+        sleep 1m
+        date +%T
+
+  windows:
+    if: github.event.action == 'windows-done'
+    name: Even more windows work
+    runs-on: windows-2019
+    steps:
+    - run: |
+        date +%T
+        sleep 5
+        date +%T
